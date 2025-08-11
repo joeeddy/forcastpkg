@@ -81,6 +81,31 @@ print(f"Accuracy: {forecast.model_accuracy:.2%}")
 print(f"Next day prediction: ${forecast.forecast_points[0].predicted_value:.2f}")
 ```
 
+### Cryptocurrency Breakout Detection
+```python
+from forcasting_pkg.crypto import CryptoBreakoutPipeline
+
+# Create crypto breakout detection pipeline
+pipeline = CryptoBreakoutPipeline(use_mock_data=True)  # Set False for real data
+
+# Run complete analysis on top cryptocurrencies  
+results = pipeline.run_full_pipeline(
+    symbol_limit=20,      # Analyze top 20 by volume
+    historical_days=30,   # 30 days of data
+    forecast_days=7,      # 7-day forecasts
+    min_signal_strength=0.6,  # Only strong signals
+    max_breakout_candidates=5  # Forecast top 5 candidates
+)
+
+# Display results
+print(f"Found {len(results['breakout_signals'])} breakout signals")
+print(f"Generated {len(results['forecasts'])} forecasts")
+
+# Get pipeline summary with CryptoBreakoutPipeline
+summary = pipeline.get_pipeline_summary(results)
+print(f"Average signal strength: {summary['signal_summary']['avg_strength']:.3f}")
+```
+
 ### Technical Analysis
 ```python
 from forcasting_pkg import TechnicalAnalyzer
