@@ -14,6 +14,12 @@ A comprehensive Python package for financial forecasting and technical analysis,
 - **Moving Averages**: Simple, Exponential, and Adaptive moving average forecasting
 - **Ensemble Methods**: Combine multiple models for improved accuracy
 
+### Cryptocurrency Analytics
+- **MEXC Exchange Integration**: Real-time data fetching from MEXC cryptocurrency exchange
+- **Breakout Detection**: Automated detection of price breakouts and volume spikes
+- **Crypto Forecasting Pipeline**: End-to-end workflow for crypto analysis and prediction
+- **Multi-Symbol Scanning**: Analyze multiple cryptocurrencies simultaneously
+
 ### Technical Analysis
 - **Indicators**: RSI, MACD, Bollinger Bands, Stochastic, Williams %R, CCI
 - **Signal Generation**: Automated trading signal generation with confidence levels
@@ -40,6 +46,11 @@ pip install forcasting-pkg
 ### Full Installation (with all optional dependencies)
 ```bash
 pip install forcasting-pkg[full]
+```
+
+### Crypto Features Installation
+```bash
+pip install forcasting-pkg[crypto]
 ```
 
 ### Development Installation
@@ -85,7 +96,19 @@ print(f"Signal: {analysis.signal_strength}")
 print(f"Confidence: {analysis.confidence:.2%}")
 ```
 
-### Visualization
+### Cryptocurrency CLI Tools
+```bash
+# Run crypto breakout detection and forecasting
+python scripts/run_crypto_breakouts.py --symbols 50 --days 30 --forecast 7
+
+# Use mock data for testing
+python scripts/run_crypto_breakouts.py --mock --symbols 10 --candidates 3
+
+# Export results to CSV
+python scripts/run_crypto_breakouts.py --symbols 30 --output crypto_analysis_results/
+```
+
+### Technical Analysis
 ```python
 from forcasting_pkg.visualization import plot_forecast, plot_technical_indicators
 
@@ -109,6 +132,9 @@ forcasting-cli compare BTC --crypto --models arima,linear,moving_average
 
 # Technical analysis with interactive plot
 forcasting-cli analyze MSFT --plot analysis.html --interactive
+
+# Crypto breakout detection and forecasting
+python scripts/run_crypto_breakouts.py --symbols 20 --forecast 7 --output results/
 ```
 
 ### Available Commands

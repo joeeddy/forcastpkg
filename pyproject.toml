@@ -56,6 +56,10 @@ full = [
     "plotly>=5.0.0",
     "jupyter>=1.0.0",
     "seaborn>=0.11.0",
+    "ccxt>=4.0.0",
+]
+crypto = [
+    "ccxt>=4.0.0",
 ]
 visualization = [
     "matplotlib>=3.5.0",

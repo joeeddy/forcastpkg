@@ -14,6 +14,16 @@ from .analysis import TechnicalAnalyzer
 from .data import DataSource
 from .models import ForecastResult, TechnicalIndicators
 
+# Crypto module (optional import to handle missing dependencies)
+try:
+    from .crypto import CryptoBreakoutPipeline, MEXCDataSource, BreakoutDetector
+    CRYPTO_AVAILABLE = True
+except ImportError:
+    CRYPTO_AVAILABLE = False
+    CryptoBreakoutPipeline = None
+    MEXCDataSource = None
+    BreakoutDetector = None
+
 __all__ = [
     "ForecastingEngine",
     "TechnicalAnalyzer", 
@@ -21,3 +31,11 @@ __all__ = [
     "ForecastResult",
     "TechnicalIndicators",
 ]
+
+# Add crypto components if available
+if CRYPTO_AVAILABLE:
+    __all__.extend([
+        "CryptoBreakoutPipeline",
+        "MEXCDataSource", 
+        "BreakoutDetector",
+    ])
