@@ -1,0 +1,40 @@
+# MANIFEST.in - Include additional files in the package distribution
+
+include README.md
+include LICENSE
+include requirements.txt
+include MANIFEST.in
+include setup.py
+
+# Include all example files
+recursive-include forcasting_pkg/examples *.py *.ipynb *.md
+
+# Include test files
+recursive-include tests_pkg *.py
+
+# Include documentation
+recursive-include docs *.md *.rst *.txt
+
+# Include notebooks if any
+recursive-include notebooks *.ipynb *.md
+
+# Exclude unnecessary files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *.pyd
+global-exclude __pycache__
+global-exclude .git*
+global-exclude .coverage
+global-exclude .pytest_cache
+global-exclude *.egg-info
+global-exclude .DS_Store
+global-exclude .vscode
+global-exclude .idea
+
+# Exclude original app files
+exclude app/
+recursive-exclude app *
+
+# Exclude environment files
+exclude .env
+exclude .env.*

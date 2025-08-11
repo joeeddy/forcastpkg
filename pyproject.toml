@@ -1,0 +1,183 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forcasting-pkg"
+version = "0.1.0"
+authors = [
+    {name = "Forcasting Package Contributors", email = "forcasting-pkg@example.com"},
+]
+description = "A comprehensive forecasting and technical analysis toolkit for financial markets"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = [
+    "forecasting",
+    "finance", 
+    "trading",
+    "technical-analysis",
+    "arima",
+    "machine-learning",
+    "time-series",
+    "stocks",
+    "cryptocurrency",
+    "market-analysis",
+]
+dependencies = [
+    "pydantic>=2.0.0",
+    "pandas>=1.5.0",
+    "numpy>=1.21.0",
+    "scikit-learn>=1.1.0",
+    "python-dateutil>=2.8.0",
+    "yfinance>=0.2.0",
+    "requests>=2.28.0",
+]
+
+[project.optional-dependencies]
+full = [
+    "statsmodels>=0.13.0",
+    "matplotlib>=3.5.0",
+    "plotly>=5.0.0",
+    "jupyter>=1.0.0",
+    "seaborn>=0.11.0",
+]
+visualization = [
+    "matplotlib>=3.5.0",
+    "plotly>=5.0.0",
+    "seaborn>=0.11.0",
+]
+stats = [
+    "statsmodels>=0.13.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0",
+    "mypy>=0.991",
+    "jupyter>=1.0.0",
+    "pre-commit>=2.20.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/example/forcasting-pkg"
+"Bug Reports" = "https://github.com/example/forcasting-pkg/issues"
+"Source" = "https://github.com/example/forcasting-pkg"
+"Documentation" = "https://forcasting-pkg.readthedocs.io/"
+
+[project.scripts]
+forcasting-cli = "forcasting_pkg.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["forcasting_pkg*"]
+exclude = ["tests*", "app*"]
+
+[tool.setuptools.package-data]
+forcasting_pkg = [
+    "examples/*.py",
+    "examples/*.ipynb",
+]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    | app
+  )/
+)
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["forcasting_pkg"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests_pkg",
+]
+python_files = [
+    "test_*.py",
+    "*_test.py",
+]
+python_classes = [
+    "Test*",
+]
+python_functions = [
+    "test_*",
+]
+
+[tool.coverage.run]
+source = ["forcasting_pkg"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "setup.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "@abstractmethod",
+]
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "yfinance.*",
+    "matplotlib.*",
+    "plotly.*",
+    "sklearn.*",
+    "statsmodels.*",
+]
+ignore_missing_imports = true
