@@ -1,400 +1,272 @@
-# WebScraper Analysis API
+# Forcasting Package
 
-A modern, comprehensive web scraping and analysis platform built with FastAPI. This application provides real-time data aggregation, forecasting, and analysis capabilities for financial markets, news, weather, and more.
+A comprehensive Python package for financial forecasting and technical analysis, optimized for real-world applications.
+
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![PyPI Version](https://img.shields.io/pypi/v/forcasting-pkg.svg)](https://pypi.org/project/forcasting-pkg/)
 
 ## 🚀 Features
 
-### Data Sources & APIs
-- **Market Data**: Stocks, cryptocurrencies using Yahoo Finance and CoinGecko
-- **News Aggregation**: Google News RSS feeds and Reddit scraping
-- **Weather Data**: Open-Meteo API (no API key required)
-- **Financial Analysis**: Technical indicators, capital flows, market sentiment
-- **Forecasting**: ARIMA, linear regression, and moving average models
-- **Pi Cycles Analysis**: Cryptocurrency market cycle analysis
+### Forecasting Models
+- **ARIMA**: Advanced AutoRegressive Integrated Moving Average with automatic parameter selection
+- **Linear Regression**: Polynomial regression with trend decomposition
+- **Moving Averages**: Simple, Exponential, and Adaptive moving average forecasting
+- **Ensemble Methods**: Combine multiple models for improved accuracy
 
-### Technical Features
-- **FastAPI Framework**: Modern, fast web framework with automatic API documentation
-- **Token Authentication**: Simple, secure token-based authentication
-- **Modular Architecture**: Easily extensible for new data sources
-- **Async Operations**: High-performance asynchronous data processing
-- **Comprehensive APIs**: RESTful endpoints with detailed documentation
-- **Error Handling**: Robust error handling and validation
+### Technical Analysis
+- **Indicators**: RSI, MACD, Bollinger Bands, Stochastic, Williams %R, CCI
+- **Signal Generation**: Automated trading signal generation with confidence levels
+- **Trend Analysis**: Multi-timeframe trend identification and strength measurement
 
-## 📋 Requirements
+### Data Sources & Visualization
+- **Multi-Source Data**: Yahoo Finance integration with fallback mechanisms
+- **Interactive Charts**: Plotly and Matplotlib support for publication-ready visualizations
+- **Real-time Data**: Current price fetching and historical data management
 
-- Python 3.8+
-- Internet connection for data fetching
-- API token for authentication (configured in `.env`)
+### Developer-Friendly Features
+- **CLI Interface**: Command-line tools for quick analysis and automation
+- **Extensible Architecture**: Easy integration of custom models and data sources
+- **Type Safety**: Full Pydantic model validation and type hints
+- **Comprehensive Testing**: Unit tests and example notebooks included
 
-## 🛠️ Installation & Setup
+## 📦 Installation
 
-### 1. Clone the Repository
+### Basic Installation
 ```bash
-git clone <repository-url>
-cd WebscraperApp
+pip install forcasting-pkg
 ```
 
-### 2. Create Virtual Environment
+### Full Installation (with all optional dependencies)
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install forcasting-pkg[full]
 ```
 
-### 3. Install Dependencies
+### Development Installation
 ```bash
-pip install -r requirements.txt
+git clone https://github.com/example/forcasting-pkg.git
+cd forcasting-pkg
+pip install -e .[dev]
 ```
 
-### 4. Configure Environment
-```bash
-cp .env.example .env
-```
+## 🔧 Quick Start
 
-Edit `.env` and set your API token:
-```env
-API_TOKEN=your_secret_token_here
-```
-
-### 5. Run the Application
-```bash
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-The API will be available at `http://localhost:8000`
-
-## 📖 API Documentation
-
-### Interactive Documentation
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-
-### Authentication
-All API endpoints (except `/` and `/health`) require authentication using a Bearer token:
-
-```bash
-curl -H "Authorization: Bearer your_secret_token_here" \
-     http://localhost:8000/api/market/stock/AAPL
-```
-
-## 🔗 API Endpoints
-
-### Market Data (`/api/market`)
-
-#### Get Stock Data
-```http
-GET /api/market/stock/{symbol}
-```
-Example: `/api/market/stock/AAPL`
-
-#### Get Cryptocurrency Data
-```http
-GET /api/market/crypto/{symbol}
-```
-Example: `/api/market/crypto/bitcoin`
-
-#### Market Overview
-```http
-GET /api/market/overview
-```
-
-#### Historical Data
-```http
-GET /api/market/historical/{symbol}?days=30&data_type=stock
-```
-
-#### Compare Symbols
-```http
-GET /api/market/compare?symbols=AAPL,GOOGL,MSFT&data_type=stock
-```
-
-### News (`/api/news`)
-
-#### Google News
-```http
-GET /api/news/google?query=bitcoin&max_articles=20
-```
-
-#### Reddit Posts
-```http
-GET /api/news/reddit/{subreddit}?max_posts=20
-```
-Example: `/api/news/reddit/worldnews`
-
-#### Financial News
-```http
-GET /api/news/financial?symbol=AAPL&max_articles=15
-```
-
-#### Trending Topics
-```http
-GET /api/news/trending
-```
-
-#### Sentiment Analysis
-```http
-GET /api/news/sentiment/{text}
-```
-
-### Weather (`/api/weather`)
-
-#### Current Weather
-```http
-GET /api/weather/current/{location}
-```
-Example: `/api/weather/current/New York`
-
-#### Weather Forecast
-```http
-GET /api/weather/forecast/{location}?days=7
-```
-
-#### Multiple Cities
-```http
-GET /api/weather/multiple?cities=London,Tokyo,Sydney
-```
-
-#### Weather Alerts
-```http
-GET /api/weather/alerts/{location}
-```
-
-### Analysis & Forecasting (`/api/analysis`)
-
-#### Generate Forecast
-```http
-GET /api/analysis/forecast/{symbol}?forecast_days=30&model_type=arima&data_type=stock
-```
-
-Model types: `arima`, `linear`, `moving_average`
-
-#### Compare Forecast Models
-```http
-GET /api/analysis/forecast/compare/{symbol}?forecast_days=30&data_type=stock
-```
-
-#### Pi Cycle Analysis
-```http
-GET /api/analysis/pi-cycle/{symbol}
-```
-Example: `/api/analysis/pi-cycle/bitcoin`
-
-#### Capital Flow Analysis
-```http
-GET /api/analysis/capital-flow/{symbol}?data_type=stock
-```
-
-#### Technical Indicators
-```http
-GET /api/analysis/technical-indicators/{symbol}?data_type=stock
-```
-
-#### Market Sentiment
-```http
-GET /api/analysis/market-sentiment?symbols=AAPL,GOOGL,bitcoin
-```
-
-#### Portfolio Analysis
-```http
-GET /api/analysis/portfolio-analysis?symbols=AAPL,GOOGL,MSFT&weights=0.4,0.3,0.3
-```
-
-#### Risk Assessment
-```http
-GET /api/analysis/risk-assessment/{symbol}?data_type=stock
-```
-
-## 💡 Usage Examples
-
-### Python Client Example
+### Basic Forecasting
 ```python
-import httpx
-import asyncio
+from forcasting_pkg import ForecastingEngine
+from forcasting_pkg.data import get_historical_data
 
-async def get_market_data():
-    headers = {"Authorization": "Bearer your_secret_token_here"}
-    
-    async with httpx.AsyncClient() as client:
-        # Get Apple stock data
-        response = await client.get(
-            "http://localhost:8000/api/market/stock/AAPL", 
-            headers=headers
-        )
-        data = response.json()
-        print(f"AAPL: ${data['current_price']:.2f}")
-        
-        # Get Bitcoin forecast
-        response = await client.get(
-            "http://localhost:8000/api/analysis/forecast/bitcoin?forecast_days=7&data_type=crypto",
-            headers=headers
-        )
-        forecast = response.json()
-        print(f"Bitcoin 7-day forecast: {forecast['model_type']}")
+# Get historical data
+data = get_historical_data("AAPL", days=90)
 
-asyncio.run(get_market_data())
+# Create forecasting engine
+engine = ForecastingEngine()
+
+# Generate 30-day ARIMA forecast
+forecast = engine.forecast(data, model="arima", symbol="AAPL", days=30)
+
+print(f"Model: {forecast.model_type}")
+print(f"Accuracy: {forecast.model_accuracy:.2%}")
+print(f"Next day prediction: ${forecast.forecast_points[0].predicted_value:.2f}")
 ```
 
-### cURL Examples
+### Technical Analysis
+```python
+from forcasting_pkg import TechnicalAnalyzer
+from forcasting_pkg.data import get_historical_data
+
+# Get data and analyze
+data = get_historical_data("TSLA", days=60)
+analyzer = TechnicalAnalyzer()
+analysis = analyzer.analyze(data, "TSLA")
+
+print(f"RSI: {analysis.technical_indicators.rsi:.2f}")
+print(f"Signal: {analysis.signal_strength}")
+print(f"Confidence: {analysis.confidence:.2%}")
+```
+
+### Visualization
+```python
+from forcasting_pkg.visualization import plot_forecast, plot_technical_indicators
+
+# Plot forecast
+plot_forecast(data, forecast, symbol="AAPL", save_path="forecast.png")
+
+# Plot technical indicators
+plot_technical_indicators(data, analysis.technical_indicators, 
+                         symbol="AAPL", save_path="technical.png")
+```
+
+## 🖥️ Command Line Interface
+
+### Generate Forecasts
 ```bash
-# Get stock data
-curl -H "Authorization: Bearer your_token" \
-     "http://localhost:8000/api/market/stock/AAPL"
+# ARIMA forecast for Apple stock
+forcasting-cli forecast AAPL --model arima --days 30 --plot forecast.png
 
-# Get weather forecast
-curl -H "Authorization: Bearer your_token" \
-     "http://localhost:8000/api/weather/forecast/London?days=5"
+# Bitcoin forecast with multiple models comparison
+forcasting-cli compare BTC --crypto --models arima,linear,moving_average
 
-# Get financial news
-curl -H "Authorization: Bearer your_token" \
-     "http://localhost:8000/api/news/financial?symbol=TSLA&max_articles=10"
+# Technical analysis with interactive plot
+forcasting-cli analyze MSFT --plot analysis.html --interactive
 ```
 
-## 🧪 Testing
-
-### Run Tests
+### Available Commands
 ```bash
-pytest tests/ -v
+forcasting-cli forecast    # Generate forecasts
+forcasting-cli analyze     # Technical analysis  
+forcasting-cli compare     # Compare models
+forcasting-cli info        # Package information
 ```
 
-### Run Example Script
-```bash
-python examples/example_usage.py
-```
+## 📊 Supported Models
 
-## 🔧 Configuration
+### Forecasting Models
 
-### Environment Variables (`.env`)
-```env
-# Required: API authentication token
-API_TOKEN=your_secret_token_here
+| Model | Description | Best For | Parameters |
+|-------|-------------|----------|------------|
+| **ARIMA** | AutoRegressive Integrated Moving Average | Stationary time series, trending data | Auto-selected (p,d,q) |
+| **Linear** | Polynomial regression with trend | Linear trends, simple patterns | Degree (1-5) |
+| **Moving Average** | Simple/Exponential/Adaptive MA | Smooth data, short-term forecasts | Window size |
+| **Ensemble** | Combination of multiple models | Robust predictions, uncertain markets | Model weights |
 
-# Optional: Rate limiting
-RATE_LIMIT_PER_MINUTE=60
+### Technical Indicators
 
-# Optional: Cache settings
-CACHE_EXPIRY_MINUTES=15
-
-# Optional: External API settings
-REDDIT_USER_AGENT=WebScraperApp/1.0
-NEWS_MAX_ARTICLES=50
-```
-
-## 🚀 Deployment
-
-### Production Deployment
-```bash
-# Install production server
-pip install gunicorn
-
-# Run with Gunicorn
-gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
-```
-
-### Docker Deployment
-```dockerfile
-FROM python:3.9-slim
-
-WORKDIR /app
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY . .
-EXPOSE 8000
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
+| Indicator | Range | Signals |
+|-----------|-------|---------|
+| **RSI** | 0-100 | Overbought (>70), Oversold (<30) |
+| **MACD** | Unbounded | Line crossovers, trend changes |
+| **Bollinger Bands** | Price-based | Breakouts, mean reversion |
+| **Stochastic** | 0-100 | Momentum, reversal points |
 
 ## 🔌 Extensibility
 
-### Adding New Data Sources
-
-1. **Create Service Module**:
+### Custom Data Sources
 ```python
-# app/services/new_service.py
-class NewDataService:
-    async def fetch_data(self):
-        # Implementation here
-        pass
+from forcasting_pkg.data import DataSource
+from forcasting_pkg.models import MarketData
+
+class CustomDataSource(DataSource):
+    def get_historical_data(self, symbol, days, data_type):
+        # Your custom data fetching logic
+        return [MarketData(...)]
+    
+    def get_current_price(self, symbol, data_type):
+        # Your custom price fetching logic
+        return price
+
+# Register with data manager
+from forcasting_pkg.data import default_data_source
+default_data_source.add_source(CustomDataSource(), priority=0)
 ```
 
-2. **Create API Router**:
+### Custom Forecasting Models
 ```python
-# app/api/new_api.py
-from fastapi import APIRouter
-router = APIRouter()
+from forcasting_pkg.forecasting import BaseForecaster
+from forcasting_pkg.models import ForecastResult
 
-@router.get("/endpoint")
-async def get_data():
-    # Implementation here
-    pass
+class CustomForecaster(BaseForecaster):
+    def fit(self, data, symbol):
+        # Your model training logic
+        self.is_fitted = True
+        return self
+    
+    def predict(self, steps):
+        # Your prediction logic
+        return ForecastResult(...)
+
+# Register with engine
+engine = ForecastingEngine()
+engine.add_custom_model("custom", CustomForecaster)
 ```
 
-3. **Register Router**:
-```python
-# app/main.py
-from app.api import new_api
-app.include_router(new_api.router, prefix="/api/new", tags=["New Data"])
+## 📈 Examples & Tutorials
+
+### Jupyter Notebooks
+- [Basic Forecasting Tutorial](examples/basic_forecasting.ipynb)
+- [Technical Analysis Guide](examples/technical_analysis.ipynb)
+- [Model Comparison Study](examples/model_comparison.ipynb)
+- [Custom Model Development](examples/custom_models.ipynb)
+
+### Python Scripts
+- [Automated Trading Signals](examples/trading_signals.py)
+- [Portfolio Analysis](examples/portfolio_analysis.py)
+- [Backtesting Framework](examples/backtesting.py)
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+pytest tests/ -v --cov=forcasting_pkg
 ```
 
-### Custom Models
-```python
-# app/models/__init__.py
-class CustomDataModel(BaseModel):
-    field1: str
-    field2: float
-    timestamp: datetime
+Run specific test categories:
+```bash
+# Unit tests only
+pytest tests/unit/ -v
+
+# Integration tests
+pytest tests/integration/ -v
+
+# Performance tests
+pytest tests/performance/ -v
 ```
 
-## 🛡️ Security
+## 📚 Documentation
 
-- **Token Authentication**: All endpoints protected with Bearer token
-- **Input Validation**: Pydantic models for request/response validation
-- **Rate Limiting**: Configurable rate limiting (optional)
-- **CORS**: Configurable CORS settings
-- **Error Handling**: Secure error messages without sensitive data exposure
+### API Reference
+- [Forecasting Engine](docs/api/forecasting.md)
+- [Technical Analysis](docs/api/analysis.md)
+- [Data Sources](docs/api/data.md)
+- [Visualization](docs/api/visualization.md)
 
-## 📊 Monitoring & Logging
-
-The application includes:
-- Health check endpoint (`/health`)
-- Structured error responses
-- Request/response logging (configurable)
-- Performance monitoring capabilities
+### Guides
+- [Getting Started](docs/guides/getting-started.md)
+- [Model Selection](docs/guides/model-selection.md)
+- [Performance Optimization](docs/guides/performance.md)
+- [Production Deployment](docs/guides/deployment.md)
 
 ## 🤝 Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -am 'Add new feature'`)
-4. Push to branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+### Development Setup
+```bash
+git clone https://github.com/example/forcasting-pkg.git
+cd forcasting-pkg
+pip install -e .[dev]
+pre-commit install
+```
+
+### Code Quality
+```bash
+# Format code
+black forcasting_pkg/
+
+# Lint code  
+flake8 forcasting_pkg/
+
+# Type checking
+mypy forcasting_pkg/
+```
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🔗 External APIs Used
+## 🙏 Acknowledgments
 
-- **Yahoo Finance**: Stock market data
-- **CoinGecko**: Cryptocurrency data
-- **Google News RSS**: News aggregation
-- **Reddit**: Social media posts
-- **Open-Meteo**: Weather data (no API key required)
-
-## ⚠️ Disclaimers
-
-- Financial data is for informational purposes only
-- Not financial advice - do your own research
-- Weather forecasts are estimates and may not be accurate
-- External API availability may affect service functionality
-- Rate limits may apply to external APIs
+- Built on top of excellent open-source libraries: pandas, scikit-learn, matplotlib, plotly
+- Inspired by financial analysis tools and academic research in time series forecasting
+- Special thanks to the Python community for providing robust numerical computing foundations
 
 ## 📞 Support
 
-For issues, questions, or contributions:
-- Open an issue on GitHub
-- Check the API documentation at `/docs`
-- Review example usage in `examples/`
+- **Documentation**: [https://forcasting-pkg.readthedocs.io/](https://forcasting-pkg.readthedocs.io/)
+- **Issues**: [GitHub Issues](https://github.com/example/forcasting-pkg/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/example/forcasting-pkg/discussions)
+- **Email**: forcasting-pkg@example.com
 
 ---
 
-**Built with ❤️ using FastAPI, Python, and modern web technologies.**
+**Disclaimer**: This package is for educational and research purposes. Always do your own research before making investment decisions. Past performance does not guarantee future results.
