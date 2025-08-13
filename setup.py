@@ -21,7 +21,7 @@ setup(
     description="A comprehensive forecasting and technical analysis toolkit for financial markets",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
-    url="https://github.com/example/forcasting-pkg",
+    url="https://github.com/joeeddy/WebscraperApp",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -47,6 +47,10 @@ setup(
             "plotly>=5.0.0",
             "jupyter>=1.0.0",
             "seaborn>=0.11.0",
+            "ccxt>=4.0.0",
+        ],
+        "crypto": [
+            "ccxt>=4.0.0",
         ],
         "visualization": [
             "matplotlib>=3.5.0",
@@ -90,8 +94,8 @@ setup(
         "market-analysis",
     ],
     project_urls={
-        "Bug Reports": "https://github.com/example/forcasting-pkg/issues",
-        "Source": "https://github.com/example/forcasting-pkg",
-        "Documentation": "https://forcasting-pkg.readthedocs.io/",
+        "Bug Reports": "https://github.com/joeeddy/WebscraperApp/issues",
+        "Source": "https://github.com/joeeddy/WebscraperApp",
+        "Documentation": "https://github.com/joeeddy/WebscraperApp/blob/main/README.md",
     },
 )

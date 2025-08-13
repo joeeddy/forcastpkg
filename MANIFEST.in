@@ -5,6 +5,7 @@ include LICENSE
 include requirements.txt
 include MANIFEST.in
 include setup.py
+include pyproject.toml
 
 # Include all example files
 recursive-include forcasting_pkg/examples *.py *.ipynb *.md

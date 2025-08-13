@@ -80,10 +80,10 @@ dev = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/example/forcasting-pkg"
-"Bug Reports" = "https://github.com/example/forcasting-pkg/issues"
-"Source" = "https://github.com/example/forcasting-pkg"
-"Documentation" = "https://forcasting-pkg.readthedocs.io/"
+"Homepage" = "https://github.com/joeeddy/WebscraperApp"
+"Bug Reports" = "https://github.com/joeeddy/WebscraperApp/issues"
+"Source" = "https://github.com/joeeddy/WebscraperApp"
+"Documentation" = "https://github.com/joeeddy/WebscraperApp/blob/main/README.md"
 
 [project.scripts]
 forcasting-cli = "forcasting_pkg.cli:main"

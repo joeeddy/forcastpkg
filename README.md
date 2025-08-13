@@ -55,9 +55,23 @@ pip install forcasting-pkg[crypto]
 
 ### Development Installation
 ```bash
-git clone https://github.com/example/forcasting-pkg.git
-cd forcasting-pkg
+git clone https://github.com/joeeddy/WebscraperApp.git
+cd WebscraperApp
 pip install -e .[dev]
+```
+
+### Install from GitHub (for AGI repo and other projects)
+```bash
+pip install git+https://github.com/joeeddy/WebscraperApp.git
+```
+
+### Install from GitHub with extras
+```bash
+# Full installation with all optional dependencies
+pip install git+https://github.com/joeeddy/WebscraperApp.git[full]
+
+# Crypto features only
+pip install git+https://github.com/joeeddy/WebscraperApp.git[crypto]
 ```
 
 ## 🔧 Quick Start
@@ -248,19 +262,16 @@ engine.add_custom_model("custom", CustomForecaster)
 
 Run the test suite:
 ```bash
-pytest tests/ -v --cov=forcasting_pkg
+pytest tests_pkg/ -v --cov=forcasting_pkg
 ```
 
 Run specific test categories:
 ```bash
 # Unit tests only
-pytest tests/unit/ -v
+pytest tests_pkg/ -v
 
-# Integration tests
-pytest tests/integration/ -v
-
-# Performance tests
-pytest tests/performance/ -v
+# Check package structure and imports
+python validate_package.py
 ```
 
 ## 📚 Documentation
@@ -283,8 +294,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ### Development Setup
 ```bash
-git clone https://github.com/example/forcasting-pkg.git
-cd forcasting-pkg
+git clone https://github.com/joeeddy/WebscraperApp.git
+cd WebscraperApp
 pip install -e .[dev]
 pre-commit install
 ```
@@ -313,10 +324,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [https://forcasting-pkg.readthedocs.io/](https://forcasting-pkg.readthedocs.io/)
-- **Issues**: [GitHub Issues](https://github.com/example/forcasting-pkg/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/example/forcasting-pkg/discussions)
-- **Email**: forcasting-pkg@example.com
+- **Documentation**: [README.md](https://github.com/joeeddy/WebscraperApp/blob/main/README.md)
+- **Issues**: [GitHub Issues](https://github.com/joeeddy/WebscraperApp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/joeeddy/WebscraperApp/discussions)
+- **Repository**: [WebscraperApp](https://github.com/joeeddy/WebscraperApp)
 
 ---
 
