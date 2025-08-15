@@ -125,7 +125,7 @@ class LinearForecaster(BaseForecaster):
         
         return ForecastResult(
             symbol=self.symbol,
-            model_type=f"Linear_Regression_Degree_{self.degree}",
+            model_type=ModelType.LINEAR,  # Use enum value instead of custom string
             forecast_period_days=steps,
             forecast_points=forecast_points,
             model_accuracy=accuracy,

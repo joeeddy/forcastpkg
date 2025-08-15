@@ -11,6 +11,7 @@ class ModelType(str, Enum):
     ARIMA = "arima"
     LINEAR = "linear"
     MOVING_AVERAGE = "moving_average"
+    ENSEMBLE = "ensemble"
 
 
 class DataType(str, Enum):

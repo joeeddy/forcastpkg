@@ -104,7 +104,7 @@ class MovingAverageForecaster(BaseForecaster):
         
         return ForecastResult(
             symbol=self.symbol,
-            model_type=f"Moving_Average_{self.window}",
+            model_type=ModelType.MOVING_AVERAGE,  # Use enum value
             forecast_period_days=steps,
             forecast_points=forecast_points,
             model_accuracy=accuracy,

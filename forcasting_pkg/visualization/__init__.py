@@ -2,7 +2,18 @@
 
 import pandas as pd
 import numpy as np
-from typing import List, Dict, Any, Optional, Union, Tuple
+from typing import List, Dict, Any, Optional, Union, Tuple, TYPE_CHECKING
+
+# Type imports that might not be available at runtime
+if TYPE_CHECKING:
+    try:
+        from matplotlib.figure import Figure
+    except ImportError:
+        Figure = Any
+    try:
+        import plotly.graph_objects as go
+    except ImportError:
+        go = Any
 from datetime import datetime, timedelta
 
 from ..models import ForecastResult, MarketData, TechnicalIndicators
@@ -11,18 +22,22 @@ from ..models import ForecastResult, MarketData, TechnicalIndicators
 try:
     import matplotlib.pyplot as plt
     import matplotlib.dates as mdates
-    from matplotlib.figure import Figure
+    from matplotlib.figure import Figure as MPLFigure
     MATPLOTLIB_AVAILABLE = True
 except ImportError:
     MATPLOTLIB_AVAILABLE = False
+    MPLFigure = Any
 
 try:
     import plotly.graph_objects as go
     from plotly.subplots import make_subplots
     import plotly.express as px
     PLOTLY_AVAILABLE = True
+    PlotlyFigure = go.Figure
 except ImportError:
     PLOTLY_AVAILABLE = False
+    go = None
+    PlotlyFigure = Any
 
 
 class ForecastVisualizer:
@@ -50,7 +65,7 @@ class ForecastVisualizer:
         save_path: Optional[str] = None,
         show_confidence: bool = True,
         interactive: bool = False
-    ) -> Optional[Union[Figure, go.Figure]]:
+    ) -> Optional[Union[MPLFigure, PlotlyFigure]]:
         """
         Plot historical data with forecast predictions.
         
@@ -80,7 +95,7 @@ class ForecastVisualizer:
         symbol: str = None,
         save_path: Optional[str] = None,
         show_confidence: bool = True
-    ) -> Figure:
+    ) -> MPLFigure:
         """Create forecast plot using matplotlib."""
         # Prepare historical data
         if isinstance(historical_data, list):
@@ -143,8 +158,11 @@ class ForecastVisualizer:
         symbol: str = None,
         save_path: Optional[str] = None,
         show_confidence: bool = True
-    ) -> go.Figure:
+    ) -> PlotlyFigure:
         """Create interactive forecast plot using plotly."""
+        if not PLOTLY_AVAILABLE:
+            raise ImportError("Plotly is required for interactive plots. Install with: pip install plotly")
+            
         # Prepare historical data
         if isinstance(historical_data, list):
             hist_df = pd.DataFrame([item.dict() for item in historical_data])
@@ -232,7 +250,7 @@ class ForecastVisualizer:
         symbol: str = "Unknown",
         save_path: Optional[str] = None,
         interactive: bool = False
-    ) -> Optional[Union[Figure, go.Figure]]:
+    ) -> Optional[Union[MPLFigure, PlotlyFigure]]:
         """
         Plot technical indicators alongside price data.
         
@@ -260,7 +278,7 @@ class ForecastVisualizer:
         indicators: TechnicalIndicators,
         symbol: str,
         save_path: Optional[str] = None
-    ) -> Figure:
+    ) -> MPLFigure:
         """Plot technical indicators using matplotlib."""
         # Prepare data
         if isinstance(data, list):
@@ -335,8 +353,11 @@ class ForecastVisualizer:
         indicators: TechnicalIndicators,
         symbol: str,
         save_path: Optional[str] = None
-    ) -> go.Figure:
+    ) -> PlotlyFigure:
         """Plot technical indicators using plotly."""
+        if not PLOTLY_AVAILABLE:
+            raise ImportError("Plotly is required for interactive plots. Install with: pip install plotly")
+            
         # Prepare data
         if isinstance(data, list):
             df = pd.DataFrame([item.dict() for item in data])
@@ -396,7 +417,7 @@ class ForecastVisualizer:
         symbol: str = "Unknown",
         save_path: Optional[str] = None,
         interactive: bool = False
-    ) -> Optional[Union[Figure, go.Figure]]:
+    ) -> Optional[Union[MPLFigure, PlotlyFigure]]:
         """
         Plot comparison of multiple forecasting models.
         
@@ -428,7 +449,7 @@ class ForecastVisualizer:
         forecast_results: Dict[str, ForecastResult],
         symbol: str,
         save_path: Optional[str] = None
-    ) -> Figure:
+    ) -> MPLFigure:
         """Plot model comparison using matplotlib."""
         # Prepare historical data
         if isinstance(historical_data, list):
@@ -482,8 +503,11 @@ class ForecastVisualizer:
         forecast_results: Dict[str, ForecastResult],
         symbol: str,
         save_path: Optional[str] = None
-    ) -> go.Figure:
+    ) -> PlotlyFigure:
         """Plot model comparison using plotly."""
+        if not PLOTLY_AVAILABLE:
+            raise ImportError("Plotly is required for interactive plots. Install with: pip install plotly")
+            
         # Prepare historical data
         if isinstance(historical_data, list):
             hist_df = pd.DataFrame([item.dict() for item in historical_data])
@@ -544,7 +568,7 @@ def plot_forecast(
     symbol: str = None,
     save_path: Optional[str] = None,
     interactive: bool = False
-) -> Optional[Union[Figure, go.Figure]]:
+) -> Optional[Union[MPLFigure, PlotlyFigure]]:
     """Convenience function to plot forecast."""
     visualizer = ForecastVisualizer()
     return visualizer.plot_forecast(historical_data, forecast_result, symbol, save_path, interactive=interactive)
@@ -556,7 +580,7 @@ def plot_technical_indicators(
     symbol: str = "Unknown",
     save_path: Optional[str] = None,
     interactive: bool = False
-) -> Optional[Union[Figure, go.Figure]]:
+) -> Optional[Union[MPLFigure, PlotlyFigure]]:
     """Convenience function to plot technical indicators."""
     visualizer = ForecastVisualizer()
     return visualizer.plot_technical_indicators(data, indicators, symbol, save_path, interactive=interactive)

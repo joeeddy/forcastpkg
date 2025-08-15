@@ -200,7 +200,7 @@ class EnsembleForecaster:
         
         return ForecastResult(
             symbol=forecasts[0].symbol,
-            model_type="ensemble",
+            model_type=ModelType.ENSEMBLE,
             forecast_period_days=len(combined_points),
             forecast_points=combined_points,
             model_accuracy=ensemble_accuracy,
