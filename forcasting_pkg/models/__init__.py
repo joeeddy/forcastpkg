@@ -1,6 +1,6 @@
 """Data models and schemas for the forecasting package."""
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict, field_serializer
 from typing import List, Optional, Dict, Any, Union
 from datetime import datetime
 from enum import Enum
@@ -29,10 +29,9 @@ class ForecastPoint(BaseModel):
     confidence_interval_lower: Optional[float] = None
     confidence_interval_upper: Optional[float] = None
     
-    class Config:
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat()
-        }
+    @field_serializer('date')
+    def serialize_date(self, value: datetime) -> str:
+        return value.isoformat()
 
 
 class ForecastResult(BaseModel):
@@ -46,10 +45,9 @@ class ForecastResult(BaseModel):
     generated_at: datetime
     data_source: Optional[str] = None
     
-    class Config:
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat()
-        }
+    @field_serializer('generated_at')
+    def serialize_generated_at(self, value: datetime) -> str:
+        return value.isoformat()
 
 
 class TechnicalIndicators(BaseModel):
@@ -81,10 +79,9 @@ class MarketData(BaseModel):
     volume: Optional[float] = Field(None, ge=0)
     adjusted_close: Optional[float] = Field(None, gt=0)
     
-    class Config:
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat()
-        }
+    @field_serializer('date')
+    def serialize_date(self, value: datetime) -> str:
+        return value.isoformat()
     
     def __post_init__(self):
         """Validate OHLC relationships."""
@@ -133,10 +130,9 @@ class AnalysisResult(BaseModel):
     confidence: Optional[float] = Field(None, ge=0, le=1)
     recommendations: Optional[List[str]] = None
     
-    class Config:
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat()
-        }
+    @field_serializer('analysis_date')
+    def serialize_analysis_date(self, value: datetime) -> str:
+        return value.isoformat()
 
 
 class BacktestResult(BaseModel):
@@ -152,7 +148,6 @@ class BacktestResult(BaseModel):
     max_error: float
     min_error: float
     
-    class Config:
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat()
-        }
+    @field_serializer('test_period_start', 'test_period_end')
+    def serialize_datetime_fields(self, value: datetime) -> str:
+        return value.isoformat()

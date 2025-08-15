@@ -53,7 +53,7 @@ class BaseForecaster(ABC):
         """Prepare and validate input data."""
         if isinstance(data, list):
             # Convert list of MarketData to DataFrame
-            df = pd.DataFrame([item.dict() for item in data])
+            df = pd.DataFrame([item.model_dump() for item in data])
         else:
             df = data.copy()
         

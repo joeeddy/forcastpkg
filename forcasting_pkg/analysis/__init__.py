@@ -308,11 +308,18 @@ class TechnicalAnalyzer:
     def _prepare_data(self, data: Union[List[MarketData], pd.DataFrame]) -> pd.DataFrame:
         """Prepare and validate input data."""
         if isinstance(data, list):
+            # Handle empty data
+            if not data:
+                return pd.DataFrame()
             # Convert list of MarketData to DataFrame
-            df = pd.DataFrame([item.dict() for item in data])
+            df = pd.DataFrame([item.model_dump() for item in data])
         else:
             df = data.copy()
         
+        # Handle empty DataFrame
+        if df.empty:
+            return df
+            
         # Ensure required columns exist
         required_columns = ['date', 'open', 'high', 'low', 'close']
         for col in required_columns:

@@ -99,7 +99,7 @@ class ForecastVisualizer:
         """Create forecast plot using matplotlib."""
         # Prepare historical data
         if isinstance(historical_data, list):
-            hist_df = pd.DataFrame([item.dict() for item in historical_data])
+            hist_df = pd.DataFrame([item.model_dump() for item in historical_data])
         else:
             hist_df = historical_data.copy()
         
@@ -165,7 +165,7 @@ class ForecastVisualizer:
             
         # Prepare historical data
         if isinstance(historical_data, list):
-            hist_df = pd.DataFrame([item.dict() for item in historical_data])
+            hist_df = pd.DataFrame([item.model_dump() for item in historical_data])
         else:
             hist_df = historical_data.copy()
         
@@ -282,7 +282,7 @@ class ForecastVisualizer:
         """Plot technical indicators using matplotlib."""
         # Prepare data
         if isinstance(data, list):
-            df = pd.DataFrame([item.dict() for item in data])
+            df = pd.DataFrame([item.model_dump() for item in data])
         else:
             df = data.copy()
         
@@ -360,7 +360,7 @@ class ForecastVisualizer:
             
         # Prepare data
         if isinstance(data, list):
-            df = pd.DataFrame([item.dict() for item in data])
+            df = pd.DataFrame([item.model_dump() for item in data])
         else:
             df = data.copy()
         
@@ -453,7 +453,7 @@ class ForecastVisualizer:
         """Plot model comparison using matplotlib."""
         # Prepare historical data
         if isinstance(historical_data, list):
-            hist_df = pd.DataFrame([item.dict() for item in historical_data])
+            hist_df = pd.DataFrame([item.model_dump() for item in historical_data])
         else:
             hist_df = historical_data.copy()
         
@@ -510,7 +510,7 @@ class ForecastVisualizer:
             
         # Prepare historical data
         if isinstance(historical_data, list):
-            hist_df = pd.DataFrame([item.dict() for item in historical_data])
+            hist_df = pd.DataFrame([item.model_dump() for item in historical_data])
         else:
             hist_df = historical_data.copy()
         
