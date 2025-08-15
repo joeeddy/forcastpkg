@@ -1,5 +1,9 @@
 """Advanced usage examples for the forecasting package."""
 
+import sys
+import os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
+
 import json
 import pandas as pd
 from datetime import datetime, timedelta
@@ -60,10 +64,10 @@ class CustomForecaster:
             )
             forecast_points.append(point)
         
-        from forcasting_pkg.models import ForecastResult
+        from forcasting_pkg.models import ForecastResult, ModelType
         return ForecastResult(
             symbol=self.symbol,
-            model_type="Custom_Trend_Following",
+            model_type=ModelType.LINEAR,  # Use LINEAR as it's closest to trend following
             forecast_period_days=steps,
             forecast_points=forecast_points,
             model_accuracy=0.75,  # Mock accuracy
@@ -402,7 +406,7 @@ def export_import_example():
     }
     
     for model_name, forecast in forecasts.items():
-        export_data["forecasts"][model_name] = forecast.dict()
+        export_data["forecasts"][model_name] = forecast.model_dump()
     
     # Save to file
     filename = "forecasts_export.json"

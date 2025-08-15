@@ -207,7 +207,7 @@ class MockDataSource(DataSource):
         default_config = DataSourceConfig(
             source_name="mock_data",
             base_url="mock://localhost",
-            rate_limit=float('inf'),
+            rate_limit=None,  # No rate limit for mock data
             timeout=1
         )
         

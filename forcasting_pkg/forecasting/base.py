@@ -53,7 +53,7 @@ class BaseForecaster(ABC):
         """Prepare and validate input data."""
         if isinstance(data, list):
             # Convert list of MarketData to DataFrame
-            df = pd.DataFrame([item.dict() for item in data])
+            df = pd.DataFrame([item.model_dump() for item in data])
         else:
             df = data.copy()
         
@@ -200,7 +200,7 @@ class EnsembleForecaster:
         
         return ForecastResult(
             symbol=forecasts[0].symbol,
-            model_type="ensemble",
+            model_type=ModelType.ENSEMBLE,
             forecast_period_days=len(combined_points),
             forecast_points=combined_points,
             model_accuracy=ensemble_accuracy,

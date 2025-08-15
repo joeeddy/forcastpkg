@@ -133,7 +133,7 @@ def forecast_command(args) -> int:
         # Save to file if requested
         if args.output:
             output_data = {
-                "forecast_result": forecast_result.dict(),
+                "forecast_result": forecast_result.model_dump(),
                 "generated_at": datetime.now().isoformat(),
                 "command_args": vars(args)
             }
@@ -223,7 +223,7 @@ def analyze_command(args) -> int:
         # Save to file if requested
         if args.output:
             output_data = {
-                "analysis_result": analysis_result.dict(),
+                "analysis_result": analysis_result.model_dump(),
                 "generated_at": datetime.now().isoformat(),
                 "command_args": vars(args)
             }
@@ -325,7 +325,7 @@ def compare_command(args) -> int:
         # Save to file if requested
         if args.output:
             output_data = {
-                "comparison_results": {k: v.dict() for k, v in comparison_results.items()},
+                "comparison_results": {k: v.model_dump() for k, v in comparison_results.items()},
                 "best_model": best_model,
                 "best_accuracy": best_accuracy,
                 "generated_at": datetime.now().isoformat(),

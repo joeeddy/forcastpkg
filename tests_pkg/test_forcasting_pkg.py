@@ -6,7 +6,7 @@ import numpy as np
 from datetime import datetime, timedelta
 from typing import List
 
-from forcasting_pkg.models import MarketData, DataType, ForecastingConfig
+from forcasting_pkg.models import MarketData, DataType, ForecastingConfig, ModelType
 from forcasting_pkg.forecasting import ForecastingEngine, ARIMAForecaster, LinearForecaster, MovingAverageForecaster
 from forcasting_pkg.analysis import TechnicalAnalyzer
 from forcasting_pkg.data import MockDataSource, DataSourceManager
@@ -139,7 +139,7 @@ class TestForecasting:
         forecast = forecaster.predict(7)
         assert forecast.symbol == "TEST"
         assert len(forecast.forecast_points) == 7
-        assert forecast.model_type.startswith("Linear_Regression")
+        assert forecast.model_type == ModelType.LINEAR
         
         # Check predictions are reasonable
         for point in forecast.forecast_points:
@@ -158,7 +158,7 @@ class TestForecasting:
         # Generate predictions
         forecast = forecaster.predict(5)
         assert len(forecast.forecast_points) == 5
-        assert forecast.model_type == "Moving_Average_10"
+        assert forecast.model_type == ModelType.MOVING_AVERAGE
     
     def test_arima_forecaster_fallback(self, sample_market_data, forecasting_config):
         """Test ARIMA forecaster (should fallback to linear if statsmodels not available)."""
@@ -172,7 +172,7 @@ class TestForecasting:
         forecast = forecaster.predict(7)
         assert len(forecast.forecast_points) == 7
         # Should either be ARIMA or fallback to linear
-        assert "ARIMA" in forecast.model_type or "Linear" in forecast.model_type
+        assert forecast.model_type in [ModelType.ARIMA, ModelType.LINEAR] or "ARIMA" in str(forecast.model_type)
     
     def test_forecasting_engine(self, sample_market_data):
         """Test forecasting engine."""
@@ -180,7 +180,7 @@ class TestForecasting:
         
         # Test available models
         models = engine.available_models()
-        assert "linear" in [str(m).lower() for m in models]
+        assert ModelType.LINEAR in models
         
         # Test forecasting
         forecast = engine.forecast(sample_market_data, "linear", "TEST", days=7)
