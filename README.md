@@ -4,7 +4,7 @@ A comprehensive Python package for financial forecasting and technical analysis,
 
 [![Python Version](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://python.org)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![PyPI Version](https://img.shields.io/pypi/v/forcasting-pkg.svg)](https://pypi.org/project/forcasting-pkg/)
+[![PyPI Version](https://img.shields.io/pypi/v/forcastpkg.svg)](https://pypi.org/project/forcastpkg/)
 
 ## 🚀 Features
 
@@ -40,38 +40,38 @@ A comprehensive Python package for financial forecasting and technical analysis,
 
 ### Basic Installation
 ```bash
-pip install forcasting-pkg
+pip install forcastpkg
 ```
 
 ### Full Installation (with all optional dependencies)
 ```bash
-pip install forcasting-pkg[full]
+pip install forcastpkg[full]
 ```
 
 ### Crypto Features Installation
 ```bash
-pip install forcasting-pkg[crypto]
+pip install forcastpkg[crypto]
 ```
 
 ### Development Installation
 ```bash
-git clone https://github.com/joeeddy/WebscraperApp.git
-cd WebscraperApp
+git clone https://github.com/joeeddy/forcastpkg.git
+cd forcastpkg
 pip install -e .[dev]
 ```
 
 ### Install from GitHub (for AGI repo and other projects)
 ```bash
-pip install git+https://github.com/joeeddy/WebscraperApp.git
+pip install git+https://github.com/joeeddy/forcastpkg.git
 ```
 
 ### Install from GitHub with extras
 ```bash
 # Full installation with all optional dependencies
-pip install git+https://github.com/joeeddy/WebscraperApp.git[full]
+pip install git+https://github.com/joeeddy/forcastpkg.git[full]
 
 # Crypto features only
-pip install git+https://github.com/joeeddy/WebscraperApp.git[crypto]
+pip install git+https://github.com/joeeddy/forcastpkg.git[crypto]
 ```
 
 ## 🔧 Quick Start
@@ -294,8 +294,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ### Development Setup
 ```bash
-git clone https://github.com/joeeddy/WebscraperApp.git
-cd WebscraperApp
+git clone https://github.com/joeeddy/forcastpkg.git
+cd forcastpkg
 pip install -e .[dev]
 pre-commit install
 ```
@@ -324,10 +324,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [README.md](https://github.com/joeeddy/WebscraperApp/blob/main/README.md)
-- **Issues**: [GitHub Issues](https://github.com/joeeddy/WebscraperApp/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/joeeddy/WebscraperApp/discussions)
-- **Repository**: [WebscraperApp](https://github.com/joeeddy/WebscraperApp)
+- **Documentation**: [README.md](https://github.com/joeeddy/forcastpkg/blob/main/README.md)
+- **Issues**: [GitHub Issues](https://github.com/joeeddy/forcastpkg/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/joeeddy/forcastpkg/discussions)
+- **Repository**: [forcastpkg](https://github.com/joeeddy/forcastpkg)
 
 ---
 
